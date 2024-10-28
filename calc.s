@@ -1,7 +1,8 @@
 	.intel_syntax noprefix
 	.section .data
 	.global _start
-
+	.global loop_start
+	
 _start:
 	xor rax, rax
 	xor rbx, rbx
@@ -9,4 +10,11 @@ _start:
 	mov rbx, OFFSET [CALC_DATA_BEGIN]
 	mov cl, BYTE PTR [CALC_DATA_BEGIN] #moving the first byte into cl
 
+loop_start:	
+	cmp cl, 0
+	je loop_end
 
+loop_end:
+	int3
+
+	
