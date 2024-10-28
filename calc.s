@@ -1,20 +1,49 @@
 	.intel_syntax noprefix
 	.section .data
 	.global _start
-	.global loop_start
-	
+
 _start:
 	xor rax, rax
 	xor rbx, rbx
-	xor cl, cl # 1 byte register to read the first symbol from CALC_DATA_BEGIN
 	mov rbx, OFFSET [CALC_DATA_BEGIN]
-	mov cl, BYTE PTR [CALC_DATA_BEGIN] #moving the first byte into cl
-
+	
+	
 loop_start:	
-	cmp cl, 0
+	cmp BYTE PTR [rbx], 0
 	je loop_end
+
+	cmp BYTE PTR [rbx], '&'
+	je if_and
+
+	cmp BYTE PTR [rbx], '|'
+	je if_or
+	
+	cmp BYTE PTR [CALC_DATA_BEGIN], '^'
+	je if_xor
+
+	add rbx, 8
+	ret
+
+if_and:
+	add rbx, 8
+	call AND_FRAG
+	jmp loop_start
+
+if_or:
+	add rbx, 8
+	call OR_FRAG
+	jmp loop_start
+
+if_xor:
+	add rbx, 8
+	call XOR_FRAG
+	jmp loop_start
 
 loop_end:
 	int3
+
+
+
+	
 
 	
