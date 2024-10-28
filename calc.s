@@ -18,9 +18,12 @@ loop_start:
 	cmp BYTE PTR [rbx], '|'
 	je if_or
 	
-	cmp BYTE PTR [CALC_DATA_BEGIN], '^'
+	cmp BYTE PTR [rbx], '^'
 	je if_xor
 
+	cmp BYTE PTR [rbx], 'U'
+	je if_lower
+	
 	add rbx, 8
 	ret
 
@@ -38,7 +41,12 @@ if_xor:
 	add rbx, 8
 	call XOR_FRAG
 	jmp loop_start
-
+	
+if_lower:
+	add rbx, 8
+	call LOWER_FRAG
+	jmp loop_start
+	
 loop_end:
 	int3
 
