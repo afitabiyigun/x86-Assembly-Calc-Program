@@ -4,4 +4,4 @@
 OR_FRAG:
 	or rax, QWORD PTR [rbx]
 	add rbx, 9
-	int3
+	ret

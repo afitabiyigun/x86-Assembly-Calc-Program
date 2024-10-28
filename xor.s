@@ -28,4 +28,4 @@ POS_CASE:
 
 _end:
 	add rbx, 8
-	int3
+	ret
