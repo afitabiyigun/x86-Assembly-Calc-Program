@@ -5,8 +5,8 @@
 _start:
 	xor rax, rax
 	xor rbx, rbx
-	xor cl, cl
+	xor cl, cl # 1 byte register to read the first symbol from CALC_DATA_BEGIN
 	mov rbx, OFFSET [CALC_DATA_BEGIN]
-	mov cl, BYTE PTR [CALC_DATA_BEGIN]
+	mov cl, BYTE PTR [CALC_DATA_BEGIN] #moving the first byte into cl
 
 
