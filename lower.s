@@ -4,23 +4,24 @@
 
 LOWER_FRAG:
 	mov rsp, QWORD PTR [rbx]
-	mov r8, QWORD PTR [rsp]
 
 loop_start:
-	cmp r8, 'A'
+	cmp BYTE PTR [rsp], 0
+	je end_loop
+	
+	cmp BYTE PTR [rsp], 'A'
 	jl next_char
 
-	cmp r8, 'Z'
+	cmp BYTE PTR [rsp], 'Z'
 	jg next_char
 
-	add rax, 1
-	# update to lower case ascii value
-
-	jmp end_loop
+	add BYTE PTR [rsp], 32
 
 next_char:
 	add rsp, 1
+	inc rax
 	jmp loop_start
 
 end_loop:
+	add rbx, 8
 	ret
