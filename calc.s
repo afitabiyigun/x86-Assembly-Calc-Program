@@ -26,9 +26,6 @@ loop_start:
 	cmp BYTE PTR [rbx], 'U'
 	je if_lower
 	
-	add rbx, 8
-	ret
-
 if_and:
 	add rbx, 8
 	call AND_FRAG
@@ -74,7 +71,10 @@ loop_end:
 	mov rdx, OFFSET [CALC_DATA_END]
 	sub rdx, rsi
 	syscall
-	
+
+	mov rax, 60
+	mov rdi, 0
+	syscall
 	
 
 	
