@@ -2,6 +2,8 @@
 	.section .data
 	.global _start
 
+out_rax: .quad 0x0
+	
 _start:
 	xor rax, rax
 	xor rbx, rbx
@@ -48,8 +50,35 @@ if_lower:
 	jmp loop_start
 	
 loop_end:
-	int3
+	mov QWORD PTR [out_rax], rax
+	mov rax, 1
+	mov rdi, 1
+	mov rsi, OFFSET [out_rax]
+	mov rdx, 8
+	syscall
 
+	mov rax, 1
+	mov rdi, 1
+	mov rsi, OFFSET [SUM_POSITIVE]
+	mov rdx, 8
+	syscall
+
+	mov rax, 1
+	mov rdi, 1
+	mov rsi, OFFSET [SUM_NEGATIVE]
+	syscall
+
+	mov rax, 1
+	mov rdi, 1
+	mov rsi, OFFSET [CALC_DATA_BEGIN]
+	mov rdx, OFFSET [CALC_DATA_END]
+	sub rdx, rsi
+	syscall
+	
+	
+
+	
+	
 
 
 	
