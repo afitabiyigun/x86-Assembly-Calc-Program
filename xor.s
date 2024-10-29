@@ -20,7 +20,7 @@ XOR_FRAG:
 
 NEG_CASE:
 	add QWORD PTR [SUM_NEGATIVE], rdx
-	jpm _end
+	jmp _end
 	
 POS_CASE:
 	add QWORD PTR [SUM_POSITIVE], rdx
