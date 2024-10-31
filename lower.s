@@ -3,22 +3,22 @@
 	.global LOWER_FRAG
 
 LOWER_FRAG:
-	mov rsp, QWORD PTR [rbx]
+	mov r8, QWORD PTR [rbx]
 
 loop_start:
-	cmp BYTE PTR [rsp], 0
+	cmp BYTE PTR [r8], 0
 	je end_loop
 	
-	cmp BYTE PTR [rsp], 'A'
+	cmp BYTE PTR [r8], 'A'
 	jl next_char
 
-	cmp BYTE PTR [rsp], 'Z'
+	cmp BYTE PTR [r8], 'Z'
 	jg next_char
 
-	add BYTE PTR [rsp], 32
+	add BYTE PTR [r8], 32
 
 next_char:
-	add rsp, 1
+	add r8, 1
 	inc rax
 	jmp loop_start
 

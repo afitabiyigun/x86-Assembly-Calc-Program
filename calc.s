@@ -9,7 +9,6 @@ _start:
 	xor rbx, rbx
 	mov rbx, OFFSET [CALC_DATA_BEGIN]
 	
-	
 loop_start:	
 	cmp BYTE PTR [rbx], 0
 	je loop_end
@@ -63,6 +62,7 @@ loop_end:
 	mov rax, 1
 	mov rdi, 1
 	mov rsi, OFFSET [SUM_NEGATIVE]
+	mov rdx, 8
 	syscall
 
 	mov rax, 1
