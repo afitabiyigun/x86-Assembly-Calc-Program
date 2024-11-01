@@ -10,6 +10,21 @@ data/simpleone_cmds.o: data/simpleone_cmds.s
 calc_simpleone: calc.o and.o or.o xor.o lower.o data/simpleone_cmds.o
 	ld -g calc.o and.o or.o xor.o lower.o data/simpleone_cmds.o -o calc_simpleone
 
+data/loweronly_cmds.o: data/loweronly_cmds.s
+	as -g data/loweronly_cmds.s -o data/loweronly_cmds.o
+
+data/easy_cmds.o: data/easy_cmds.s
+	as -g data/easy_cmds.s -o data/easy_cmds.o
+
+data/basicwithlower_cmds.o: data/basicwithlower_cmds.s
+	as -g data/basicwithlower_cmds.s -o data/basicwithlower_cmds.o
+
+simplerandom_cmds.o: simplerandom_cmds.s
+	as -g data/simplerandom_cmds.s -o data.simplerandom_cmds.o
+
+calc_simplerandom: simplerandom_cmds.o data/basicwithlower_cmds.o data/easy.o data/loweronly_cmds.s
+	ld -g simplerandom_cmds.o data/basicwithlower_cmds.o data/easy.o data/loweronly_cmds.s -o calc_simplerandom
+
 and: and.o
 	ld -g -o and and.o
 and.o: and.s
