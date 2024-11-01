@@ -13,17 +13,26 @@ calc_simpleone: calc.o and.o or.o xor.o lower.o data/simpleone_cmds.o
 data/loweronly_cmds.o: data/loweronly_cmds.s
 	as -g data/loweronly_cmds.s -o data/loweronly_cmds.o
 
+calc_loweronly: calc.o and.o or.o xor.o lower.o data/loweronly_cmds.o
+	ld -g calc.o and.o or.o xor.o lower.o data/loweronly_cmds.o -o calc_loweronly
+
 data/easy_cmds.o: data/easy_cmds.s
 	as -g data/easy_cmds.s -o data/easy_cmds.o
+
+calc_easy: calc.o and.o or.o xor.o lower.o data/easy.o
+	ld -g calc.o and.o or.o xor.o lower.o data/easy.o -o calc_easy
 
 data/basicwithlower_cmds.o: data/basicwithlower_cmds.s
 	as -g data/basicwithlower_cmds.s -o data/basicwithlower_cmds.o
 
+calc_basicwithlower: calc.o and.o or.o xor.o lower.o data/basicwithlower_cmds.o
+	ld -g calc.o and.o or.o xor.o lower.o data/basicwithlower_cmds.o -o calc_lowerwithonly
+
 simplerandom_cmds.o: simplerandom_cmds.s
 	as -g data/simplerandom_cmds.s -o data/simplerandom_cmds.o
 
-calc_simplerandom: calc.o lower.o simplerandom_cmds.o data/basicwithlower_cmds.o data/easy.o data/loweronly_cmds.s
-	ld -g calc.o lower.o simplerandom_cmds.o data/basicwithlower_cmds.o data/easy.o data/loweronly_cmds.s -o calc_simplerandom
+calc_simplerandom: calc.o and.o or.o xor.o lower.o simplerandom_cmds.o
+	ld -g calc.o lower.o and.o or.o xor.o simplerandom_cmds.o -o calc_simplerandom
 
 and: and.o
 	ld -g -o and and.o
