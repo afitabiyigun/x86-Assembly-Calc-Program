@@ -1,12 +1,13 @@
 	.intel_syntax noprefix
 	.section .data
-	.global _start
 
 out_rax: .quad 0x0
-	
+
+	.global OUT_RAX
+	.global _start
+	.section .text
 _start:
 	xor rax, rax
-	xor rbx, rbx
 	mov rbx, OFFSET [CALC_DATA_BEGIN]
 	
 loop_start:	
@@ -46,10 +47,10 @@ if_lower:
 	jmp loop_start
 	
 loop_end:
-	mov QWORD PTR [out_rax], rax
+	mov QWORD PTR [OUT_RAX], rax
 	mov rax, 1
 	mov rdi, 1
-	mov rsi, OFFSET [out_rax]
+	mov rsi, OFFSET [OUT_RAX]
 	mov rdx, 8
 	syscall
 
