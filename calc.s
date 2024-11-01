@@ -1,27 +1,28 @@
 	.intel_syntax noprefix
 	.section .data
 
-OUT_RAX: .quad 0x0
+OUT_RAX:
+	.quad 0x0 
 
-	.global OUT_RAX
-	.global _start
-	.section .text
+	.global OUT_RAX #defining a variable globally to store the value of rax before doing syscalls
+	.global _start #defining _start globally to be able to run the testscripts
+	.section .text 
 _start:
-	xor rax, rax
-	mov rbx, OFFSET [CALC_DATA_BEGIN]
+	xor rax, rax #initializing rax to zero
+	mov rbx, OFFSET [CALC_DATA_BEGIN] #initializing rbx to the address of CALC_DATA_BEGIN
 	
 loop_start:	
-	cmp BYTE PTR [rbx], 0
-	je loop_end
+	cmp BYTE PTR [rbx], 0 #checking if the first byte of current command is zero via byte pointer
+	je loop_end #exiting out of the loop by jumping to loop_end that exits out of the program
 
-	cmp BYTE PTR [rbx], '&'
-	je if_and
+	cmp BYTE PTR [rbx], '&' #checking if the first byte of current command is the and symbol via byte pointer
+	je if_and #jumping to the if_and label where AND_FRAG function is called
 
-	cmp BYTE PTR [rbx], '|'
-	je if_or
+	cmp BYTE PTR [rbx], '|' #checking if the first byte of current command is the or symbol via byte pointer
+	je if_or #jumping to the if_or label where OR_FRAG function is called
 	
-	cmp BYTE PTR [rbx], '^'
-	je if_xor
+	cmp BYTE PTR [rbx], '^' #checking if the first byte of current command is the xor symbol via byte pointer
+	je if_xor #jumping to the if_xor label where XOR_FRAG function is called
 
 	cmp BYTE PTR [rbx], 'U'
 	je if_lower
