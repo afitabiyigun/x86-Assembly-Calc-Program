@@ -22,8 +22,8 @@ data/basicwithlower_cmds.o: data/basicwithlower_cmds.s
 simplerandom_cmds.o: simplerandom_cmds.s
 	as -g data/simplerandom_cmds.s -o data/simplerandom_cmds.o
 
-calc_simplerandom: simplerandom_cmds.o data/basicwithlower_cmds.o data/easy.o data/loweronly_cmds.s
-	ld -g simplerandom_cmds.o data/basicwithlower_cmds.o data/easy.o data/loweronly_cmds.s -o calc_simplerandom
+calc_simplerandom: calc.o lower.o simplerandom_cmds.o data/basicwithlower_cmds.o data/easy.o data/loweronly_cmds.s
+	ld -g calc.o lower.o simplerandom_cmds.o data/basicwithlower_cmds.o data/easy.o data/loweronly_cmds.s -o calc_simplerandom
 
 and: and.o
 	ld -g -o and and.o
