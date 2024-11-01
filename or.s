@@ -3,5 +3,5 @@
 	.global OR_FRAG
 OR_FRAG:
 	or rax, QWORD PTR [rbx]
-	add rbx, 9
+	add rbx, 8
 	ret
