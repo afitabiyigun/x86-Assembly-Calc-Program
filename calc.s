@@ -24,59 +24,59 @@ loop_start:
 	cmp BYTE PTR [rbx], '^' #checking if the first byte of current command is the xor symbol via byte pointer
 	je if_xor #jumping to the if_xor label where XOR_FRAG function is called
 
-	cmp BYTE PTR [rbx], 'U'
-	je if_lower
+	cmp BYTE PTR [rbx], 'U' #checking if the first byte of current command is the lower symbol via byte pointer
+	je if_lower #jumping to the if_lower label where LOWER_FRAG function is called
 	
 if_and:
-	add rbx, 8
-	call AND_FRAG
-	jmp loop_start
+	add rbx, 8 #moving to the next command
+	call AND_FRAG #calling the and.s function
+	jmp loop_start #jumping back to the loop for the next command
 
 if_or:
-	add rbx, 8
-	call OR_FRAG
-	jmp loop_start
+	add rbx, 8 #moving to the next command
+	call OR_FRAG #calling the or.s function
+	jmp loop_start #jumping back to the loop for the next command
 
 if_xor:
-	add rbx, 8
-	call XOR_FRAG
-	jmp loop_start
+	add rbx, 8 #moving to the next command
+	call XOR_FRAG #calling the xor.s function
+	jmp loop_start #jumping back to the loop for the next command
 	
 if_lower:
-	add rbx, 8
-	call LOWER_FRAG
-	jmp loop_start
+	add rbx, 8 #moving to the next command
+	call LOWER_FRAG #calling the lower.s function
+	jmp loop_start #jumping back to the loop for the next command
 	
 loop_end:
-	mov QWORD PTR [OUT_RAX], rax
+	mov QWORD PTR [OUT_RAX], rax #moving the value inside rax register to my globally defined OUT_RAX data object via qword pointer
 	mov rax, 1
 	mov rdi, 1
 	mov rsi, OFFSET [OUT_RAX]
 	mov rdx, 8
-	syscall
+	syscall #performing syscall to write standard output for OUT_RAX
 
 	mov rax, 1
 	mov rdi, 1
 	mov rsi, OFFSET [SUM_POSITIVE]
 	mov rdx, 8
-	syscall
+	syscall #performing syscall to write standard output for SUM_POSITIVE
 
 	mov rax, 1
 	mov rdi, 1
-	mov rsi, OFFSET [SUM_NEGATIVE]
+	mov rsi, OFFSET [SUM_NEGATIVE] 
 	mov rdx, 8
-	syscall
+	syscall #performing syscall to write standard output for SUM_NEGATIVE
 
 	mov rax, 1
 	mov rdi, 1
 	mov rsi, OFFSET [CALC_DATA_BEGIN]
 	mov rdx, OFFSET [CALC_DATA_END]
-	sub rdx, rsi
-	syscall
+	sub rdx, rsi #subracting CALC_DATA_END from CALC_DATA_BEGIN to calculate the number of bytes used in memory
+	syscall #performing syscall to write standard output for the number of bytes used in memory
 
 	mov rax, 60
 	mov rdi, 0
-	syscall
+	syscall #performing syscall to return
 	
 
 	
