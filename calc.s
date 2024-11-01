@@ -1,7 +1,7 @@
 	.intel_syntax noprefix
 	.section .data
 
-out_rax: .quad 0x0
+OUT_RAX: .quad 0x0
 
 	.global OUT_RAX
 	.global _start
