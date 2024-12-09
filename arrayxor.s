@@ -14,14 +14,16 @@ ARRAYXOR:
 
 	mov rdx, QWORD PTR [rbx]
 	add rbx, 8
-	mov rbx, QWORD PTR [rbx]
+	mov r8, QWORD PTR [rbx]
 	
 loop_start:
 	cmp rdx, 0
 	jz loop_end
 
-	mov rax, QWORD PTR [rsi + rdx*8]
-	xor rax, rcx
+	mov rax, QWORD PTR [r8]
+	call XOR_FRAG
+	dec rdx
+	
 
 loop_end:	
 	
