@@ -27,6 +27,12 @@ loop_start:
 	cmp BYTE PTR [rbx], 'U' #checking if the first byte of current command is the lower symbol via byte pointer
 	je if_lower #jumping to the if_lower label where LOWER_FRAG function is called
 	
+	cmp BYTE PTR [rbx], 'a'
+	je if_arrayxor
+
+	cmp BYTE PTR [rbx], 'l'
+	je if_listxor
+	
 if_and:
 	add rbx, 8 #moving to the next command
 	call AND_FRAG #calling the and.s function
@@ -46,7 +52,17 @@ if_lower:
 	add rbx, 8 #moving to the next command
 	call LOWER_FRAG #calling the lower.s function
 	jmp loop_start #jumping back to the loop for the next command
+
+if_arrayxor:
+	add rbx, 8
+	call ARRAYXOR 
+	jmp loop_start
 	
+if_listxor:
+	add rbx, 8
+	call LISTXOR
+	jmp loop_start
+
 loop_end:
 	mov QWORD PTR [OUT_RAX], rax #moving the value inside rax register to my globally defined OUT_RAX data object via qword pointer
 	mov rax, 1
