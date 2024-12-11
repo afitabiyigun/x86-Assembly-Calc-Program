@@ -55,9 +55,9 @@ if_lower:
 
 if_arrayxor:
 	add rbx, 8
-	call ARRAYXOR 
+	call ARRAYXOR
 	jmp loop_start
-	
+
 if_listxor:
 	add rbx, 8
 	call LISTXOR

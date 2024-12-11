@@ -1,33 +1,26 @@
 	.intel_syntax noprefix
-	.section .data
-	.global ARRAYXOR
-	
 	.section .text
-	
+	.global ARRAYXOR
+		
 ARRAYXOR:
-	push rbx
-	push rdx
-	
-	xor rdx, rdx
-	xor rax, rax
-
-	mov rdx, QWORD PTR [rbx]
+	xor r9, r9
+	mov r9, QWORD PTR [rbx]
 	add rbx, 8
+	xor rcx, rcx
+	mov rcx, rbx
 	mov rbx, QWORD PTR [rbx]
-	
-loop_start:
-	cmp rdx, 0
-	jz loop_end
 
-	mov rax, QWORD PTR [r8]
+loop_start:
+	cmp r9, 0
+	je loop_end
+
 	call XOR_FRAG
-	dec rdx
+
+	dec r9
 	jmp loop_start
 
-loop_end:	
-	pop rdx
-	pop rbx
+loop_end:
+	mov rbx, rcx
 	add rbx, 8
-
 	ret
 	
