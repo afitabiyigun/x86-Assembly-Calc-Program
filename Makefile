@@ -37,13 +37,13 @@ calc_simplerandom: calc.o and.o or.o xor.o lower.o data/simplerandom_cmds.o
 
 data/arrayxor_cmds.o: data/arrayxor_cmds.s
 	as -g data/arrayxor_cmds.s -o data/arrayxor_cmds.o
-calc_arrayxor: calc.o data/arrayxor_cmds.o arrayxor.o
-	ld -g calc.o data/arrayxor_cmds.o and.o or.o xor.o lower.o arrayxor.o listxor.o -o calc_arrayxor
+calc_arrayxor: calc.o data/arrayxor_cmds.o arrayxor.o and.o or.o xor.o lower.o listxor.o
+	ld -g calc.o data/arrayxor_cmds.o arrayxor.o and.o or.o xor.o lower.o listxor.o -o calc_arrayxor
 
 data/listxor_cmds.o:  data/listxor_cmds.s
 	as -g data/listxor_cmds.s -o data/listxor_cmds.o
-calc_listxor: calc.o data/listxor_cmds.o listxor.o
-	ld -g calc.o and.o or.o xor.o lower.o arrayxor.o listxor.o atoq.o data/listxor_cmds.o -o calc_listxor
+calc_listxor: calc.o data/listxor_cmds.o listxor.o and.o or.o xor.o lower.o arrayxor.o
+	ld -g calc.o data/listxor_cmds.o listxor.o and.o or.o xor.o lower.o arrayxor.o -o calc_listxor
 
 #creates the `and` executable by linking the `and.o` object file and assembles the `and.s` source file to produce the `and.o` object file
 and: and.o
